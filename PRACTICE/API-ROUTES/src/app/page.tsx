@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/Button/button";
-
+import Link from "next/link";
 export default async function Page() {
   type User = {
     id: number;
@@ -30,9 +30,11 @@ export default async function Page() {
             className="bg-white rounded-2xl shadow-md p-6 border hover:shadow-lg transition-all"
           >
             <div className="mb-3">
-              <h2 className="text-xl font-semibold text-gray-800">
-                {user.name}
-              </h2>
+              <Link href ={`User/${user.name}`}>
+                <h2 className="text-xl font-semibold text-gray-800">
+                  {user.name}
+                </h2>
+              </Link>
               <p className="text-sm text-gray-500">{user.email}</p>
             </div>
 
@@ -77,7 +79,11 @@ export default async function Page() {
               </p>
             </div>
 
-            <div className="flex justify-end"><Button variant="destructive">DELETE USER</Button></div>
+            <div className="flex justify-end">
+              <Button className="cursor-pointer" variant="destructive">
+                DELETE USER
+              </Button>
+            </div>
           </div>
         ))}
       </div>
