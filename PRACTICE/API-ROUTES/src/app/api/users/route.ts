@@ -1,5 +1,15 @@
-export const GET = async () => {
-  const users = [
+import { NextRequest , NextResponse } from "next/server";
+let id = 21
+   type User = {
+    id: number;
+    name: string;
+    email: string;
+    age: number;
+    gender: string;
+    country: string;
+    createdAt: string;
+  };
+ const users: User[] = [
     {
       id: 1,
       name: "Ali Raza",
@@ -7,8 +17,6 @@ export const GET = async () => {
       age: 25,
       gender: "Male",
       country: "Pakistan",
-      status: "Active",
-      role: "user",
       createdAt: "2024-01-10",
     },
     {
@@ -18,8 +26,6 @@ export const GET = async () => {
       age: 22,
       gender: "Female",
       country: "Pakistan",
-      status: "Active",
-      role: "admin",
       createdAt: "2024-02-15",
     },
     {
@@ -29,8 +35,6 @@ export const GET = async () => {
       age: 28,
       gender: "Male",
       country: "Pakistan",
-      status: "Inactive",
-      role: "user",
       createdAt: "2023-11-22",
     },
     {
@@ -40,8 +44,6 @@ export const GET = async () => {
       age: 24,
       gender: "Female",
       country: "Pakistan",
-      status: "Active",
-      role: "user",
       createdAt: "2024-03-01",
     },
     {
@@ -51,8 +53,6 @@ export const GET = async () => {
       age: 30,
       gender: "Male",
       country: "Pakistan",
-      status: "Inactive",
-      role: "moderator",
       createdAt: "2023-12-10",
     },
     {
@@ -62,8 +62,6 @@ export const GET = async () => {
       age: 26,
       gender: "Female",
       country: "Pakistan",
-      status: "Active",
-      role: "user",
       createdAt: "2024-04-02",
     },
     {
@@ -73,8 +71,6 @@ export const GET = async () => {
       age: 27,
       gender: "Male",
       country: "Pakistan",
-      status: "Active",
-      role: "admin",
       createdAt: "2023-10-05",
     },
     {
@@ -84,8 +80,6 @@ export const GET = async () => {
       age: 23,
       gender: "Female",
       country: "Pakistan",
-      status: "Inactive",
-      role: "user",
       createdAt: "2024-01-25",
     },
     {
@@ -95,8 +89,6 @@ export const GET = async () => {
       age: 29,
       gender: "Male",
       country: "Pakistan",
-      status: "Active",
-      role: "user",
       createdAt: "2023-08-14",
     },
     {
@@ -106,8 +98,6 @@ export const GET = async () => {
       age: 21,
       gender: "Female",
       country: "Pakistan",
-      status: "Inactive",
-      role: "moderator",
       createdAt: "2024-06-01",
     },
     {
@@ -117,8 +107,6 @@ export const GET = async () => {
       age: 32,
       gender: "Male",
       country: "Pakistan",
-      status: "Active",
-      role: "admin",
       createdAt: "2023-09-09",
     },
     {
@@ -128,8 +116,6 @@ export const GET = async () => {
       age: 24,
       gender: "Female",
       country: "Pakistan",
-      status: "Inactive",
-      role: "user",
       createdAt: "2024-05-11",
     },
     {
@@ -139,8 +125,6 @@ export const GET = async () => {
       age: 27,
       gender: "Male",
       country: "Pakistan",
-      status: "Active",
-      role: "user",
       createdAt: "2023-12-30",
     },
     {
@@ -150,8 +134,6 @@ export const GET = async () => {
       age: 28,
       gender: "Female",
       country: "Pakistan",
-      status: "Inactive",
-      role: "admin",
       createdAt: "2024-03-17",
     },
     {
@@ -161,8 +143,6 @@ export const GET = async () => {
       age: 33,
       gender: "Male",
       country: "Pakistan",
-      status: "Active",
-      role: "moderator",
       createdAt: "2023-07-22",
     },
     {
@@ -172,8 +152,6 @@ export const GET = async () => {
       age: 22,
       gender: "Female",
       country: "Pakistan",
-      status: "Active",
-      role: "user",
       createdAt: "2024-04-18",
     },
     {
@@ -183,8 +161,6 @@ export const GET = async () => {
       age: 25,
       gender: "Male",
       country: "Pakistan",
-      status: "Inactive",
-      role: "user",
       createdAt: "2024-01-07",
     },
     {
@@ -194,8 +170,6 @@ export const GET = async () => {
       age: 26,
       gender: "Female",
       country: "Pakistan",
-      status: "Active",
-      role: "user",
       createdAt: "2023-11-15",
     },
     {
@@ -205,8 +179,6 @@ export const GET = async () => {
       age: 31,
       gender: "Male",
       country: "Pakistan",
-      status: "Active",
-      role: "admin",
       createdAt: "2023-06-11",
     },
     {
@@ -216,11 +188,30 @@ export const GET = async () => {
       age: 20,
       gender: "Female",
       country: "Pakistan",
-      status: "Inactive",
-      role: "user",
       createdAt: "2024-02-21",
     },
   ];
 
+export const GET = async () => {
   return Response.json(users);
 };
+
+export const POST = async (request: NextRequest) => {
+  const body = await request.json();
+  users.push(body)
+return NextResponse.json({
+    message: "Data received successfully!",
+    receivedData: body,}
+);
+}
+
+export const DELETE = async (request: NextRequest) => {
+  const obj = await request.json()
+  const id = obj.id;
+  console.log("id", id);
+  users.splice(id , 1)
+  return NextResponse.json({
+    message: "Data deleted successfully!",
+    id : id,
+    });
+}

@@ -1,15 +1,13 @@
+type User = {
+  id: number;
+  name: string;
+  email: string;
+  age: number;
+  gender: string;
+  country: string;
+  createdAt: string;
+};
 export default async function Page({params}: {params: { name: string }}) {
-  type User = {
-    id: number;
-    name: string;
-    email: string;
-    age: number;
-    gender: string;
-    country: string;
-    status: string;
-    role: string;
-    createdAt: string;
-  };
   let {name} = params;
   name = decodeURIComponent(name);
   console.log(name);
@@ -24,6 +22,7 @@ export default async function Page({params}: {params: { name: string }}) {
   });
 
   console.log(singleUser);
+
   
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
@@ -49,13 +48,7 @@ export default async function Page({params}: {params: { name: string }}) {
             <span className="font-medium text-gray-700">Country:</span>{" "}
             {singleUser.country}
           </p>
-          <p>
-            <span className="font-medium text-gray-700">Status:</span>{" "}
-            {singleUser.status}
-          </p>
-          <p>
-            <span className="font-medium text-gray-700">Role:</span> {singleUser.role}
-          </p>
+
           <p>
             <span className="font-medium text-gray-700">Joined:</span>{" "}
             {new Date(singleUser.createdAt).toLocaleDateString()}
